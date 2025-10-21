@@ -16,5 +16,10 @@ Detta program är en vidareutveckling av inlämningsuppgift 1. Det samlar in, an
 - `data_manager.cpp`: implementerar all logik för datainsamling, analys och filhantering
 - `INL2.cpp`: innehåller meny och styr programflödet
 
+## Hur de arbetar tillsammans
+INL2.cpp
+ └── uses → DataManager (data_manager.h + .cpp)
+         └── uses → Measurement (measurement.h)
 
-Faid
+
+  FAID ABSHIR ABDILE

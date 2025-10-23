@@ -7,8 +7,8 @@
 
 class DataManager {
 private:
-    std::vector<Measurement> data;
-    const int MAX = 25;
+	std::vector<Measurement> data;  // Vector to store measurements
+	const int MAX = 25; // Maximum number of measurements
 
 public:
     void inputMeasurements();

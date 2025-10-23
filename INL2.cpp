@@ -13,10 +13,10 @@ int main() {
     setlocale(LC_ALL, "SV_se");
 
     DataManager manager;
-    manager.loadFromFile("temperatures.csv");
+	manager.loadFromFile("temperatures.csv");  // Load existing data if available
 
     cout << "Hej! Välkommen till mitt inlämningsuppgift.\n";
-    manager.inputMeasurements();
+	manager.inputMeasurements(); // Initial input
 
     int val;
     do {
@@ -40,9 +40,9 @@ int main() {
         }
     } while (val != 6 && !manager.isFull());
 
-    manager.saveToFile("temperatures.csv");
+	manager.saveToFile("temperatures.csv");  // Save data before exiting
 
-    if (manager.isFull()) {
+	if (manager.isFull()) {  // Notify if max reached
         cout << "Max antal mätvärden nått, avslutar programmet.\n";
     }
 

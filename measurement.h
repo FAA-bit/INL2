@@ -4,8 +4,8 @@
 #include <string>
 
 struct Measurement {
-    float value;
-    std::string timestamp;
+	float value;  // e.g., temperature in Celsius
+	std::string timestamp;  // e.g., "2024-06-01 14:30:00"
 };
 
 #endif

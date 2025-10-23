@@ -9,7 +9,7 @@
 
 using namespace std;
 
-string getTimestamp() {
+string getTimestamp() {  // Get current timestamp as string
     time_t now = time(0);
     struct tm tid;
     localtime_s(&tid, &now);
@@ -43,18 +43,18 @@ void DataManager::simulateSensor() {
         return;
     }
 
-    int antalSimuleringar;
+    int numberOfSimulations;
     cout << "Hur många mätvärden vill du simulera?\n";
-    cin >> antalSimuleringar;
+    cin >> numberOfSimulations;
 
-    if (antalSimuleringar <= 0 || antalSimuleringar > (MAX - data.size())) {
+    if (numberOfSimulations <= 0 || numberOfSimulations > (MAX - data.size())) {
         cout << "Ogiltigt antal. Max tillgängliga platser: " << (MAX - data.size()) << "\n";
         return;
     }
 
     srand(static_cast<unsigned int>(time(nullptr)));
 
-    for (int i = 0; i < antalSimuleringar; i++) {
+    for (int i = 0; i < numberOfSimulations; i++) {
         float slumpvärde = 20.0 + static_cast<float>(rand()) / RAND_MAX * 10.0;
         data.push_back({ slumpvärde, getTimestamp() });
         cout << "Simulerat värde " << (data.size()) << ": " << slumpvärde << " °C\n";
@@ -83,19 +83,19 @@ void DataManager::searchValue() {
         return;
     }
 
-    float sökt;
+    float searched;
     cout << "Ange värde att söka efter: ";
-    cin >> sökt;
-    bool hittad = false;
+    cin >> searched;
+    bool found = false;
 
     for (size_t i = 0; i < data.size(); i++) {
-        if (data[i].value == sökt) {
-            cout << "Värdet " << sökt << " hittades på position " << (i + 1) << ".\n";
-            hittad = true;
+        if (data[i].value == searched) {
+            cout << "Värdet " << searched << " hittades på position " << (i + 1) << ".\n";
+            found = true;
         }
     }
 
-    if (!hittad) {
+    if (!found) {
         cout << "Värdet hittades inte.\n";
     }
 }
@@ -130,7 +130,7 @@ void DataManager::showStatistics() {
     cout << "Standardavvikelse: " << stddev << "\n";
 }
 
-void DataManager::loadFromFile(const string& filename) {
+void DataManager::loadFromFile(const string& filename) {  // Load data from CSV file
     ifstream fil(filename);
     string line;
     while (getline(fil, line)) {
@@ -144,7 +144,7 @@ void DataManager::loadFromFile(const string& filename) {
     fil.close();
 }
 
-void DataManager::saveToFile(const string& filename) const {
+void DataManager::saveToFile(const string& filename) const {  // Save data to CSV file
     ofstream fil(filename);
     for (const auto& m : data) {
         fil << m.timestamp << "," << m.value << endl;
@@ -152,12 +152,12 @@ void DataManager::saveToFile(const string& filename) const {
     fil.close();
 }
 
-void DataManager::printMeasurements() const {
+void DataManager::printMeasurements() const { // Print all measurements
     for (const auto& m : data) {
         cout << m.timestamp << " → " << m.value << " °C\n";
     }
 }
 
-bool DataManager::isFull() const {
+bool DataManager::isFull() const {  // Check if data storage is full
     return data.size() >= MAX;
 }
